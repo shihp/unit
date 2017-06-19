@@ -1,18 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-    <title>Untitled Page</title>
-    <script type="text/javascript" src="/html/js/jquery-1.7.min.js"></script>
+    <title>test Page</title>
+    <script type="text/javascript" src="/html/jquery/jquery-3.1.0.min.js"></script>
     <script type="text/javascript">
         jQuery(document).ready(function(){
             $.ajax({
                 type: "get",
                 async: false,
-                url: "http://php.local/jsonp/jsonp.php?code=CA1998",
+                url: "http://gm-cf.lan_dev.com/index.php/meimei/hello-world/hello",
                 dataType: "jsonp",
                 jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
                 jsonpCallback:"flightHandler",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
                 success: function(json){
+                    console.log(json);
                     alert('您查询到航班信息：票价： ' + json.price + ' 元，余票： ' + json.tickets + ' 张。');
                 },
                 error: function(){
@@ -20,8 +21,14 @@
                 }
             });
         });
+
+        function callback22() {
+            console.log('hello world');
+        }
     </script>
 </head>
 <body>
+hello world
+<img src="http://testimagecdn.movemama.com/ad_conf/201706/f3b244a0e1d0b24208d0ebcf3b7fe3a3.jpg" alt=""/>
 </body>
 </html>
