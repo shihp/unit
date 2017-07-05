@@ -68,13 +68,15 @@ $(function() {
 		},
 
 		// Rename files by clicking on their titles
-		rename: true,
+		rename: false,
 		
 		// Sort files
 		sortable: true,
 
 		// Enable ability to drag'n'drop files onto the widget (currently only HTML5 supports that)
 		dragdrop: true,
+
+		unique_names:false,
 
 		// Views to activate
 		views: {
@@ -87,27 +89,52 @@ $(function() {
 		flash_swf_url : '../../js/Moxie.swf',
 
 		// Silverlight settings
-		silverlight_xap_url : '../../js/Moxie.xap'
+		silverlight_xap_url : '../../js/Moxie.xap',
+
+		preinit : {
+			Init: function(up, info) {
+				log('[Init]', 'Info:', info, 'Features:', up.features);
+			},
+
+			UploadFile: function(up, file) {
+				log('[UploadFile]', file);
+				// You can override settings before the file is uploaded
+				// up.setOption('url', 'upload.php?id=' + file.id);
+				// up.setOption('multipart_params', {param1 : 'value1', param2 : 'value2'});
+			},
+			FileUploaded:function (up,file,info) {
+				console.log(up);
+				console.log(file);
+				console.log(info);
+			}
+		}
+
 	});
 
+	function log(info,file) {
+		console.log(info);
+		console.log(file);
+	}
 
 	// Handle the case when form was submitted before uploading has finished
 	$('#form').submit(function(e) {
-		console.log($('#form'));
 		// Files in queue upload them first
 		if ($('#uploader').plupload('getFiles').length > 0) {
-
 			// When all files are uploaded submit form
 			$('#uploader').on('complete', function() {
+				alert($('#form')[0].serializeArray);
 				$('#form')[0].submit();
 			});
-
 			$('#uploader').plupload('start');
 		} else {
 			alert("You must have at least one file in the queue.");
 		}
 		return false; // Keep the form from submitting
 	});
+
+	function hello(){
+		console.log('hello')
+	}
 });
 </script>
 </body>

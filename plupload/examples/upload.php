@@ -60,6 +60,7 @@ if (isset($_REQUEST["name"])) {
 
 $filePath = $targetDir . DIRECTORY_SEPARATOR . $fileName;
 
+var_dump($filePath);
 // Chunking might be enabled
 $chunk = isset($_REQUEST["chunk"]) ? intval($_REQUEST["chunk"]) : 0;
 $chunks = isset($_REQUEST["chunks"]) ? intval($_REQUEST["chunks"]) : 0;
@@ -93,6 +94,7 @@ if (!$out = @fopen("{$filePath}.part", $chunks ? "ab" : "wb")) {
 	die('{"jsonrpc" : "2.0", "error" : {"code": 102, "message": "Failed to open output stream."}, "id" : "id"}');
 }
 
+var_dump($_FILES);exit;
 if (!empty($_FILES)) {
 	if ($_FILES["file"]["error"] || !is_uploaded_file($_FILES["file"]["tmp_name"])) {
 		die('{"jsonrpc" : "2.0", "error" : {"code": 103, "message": "Failed to move uploaded file."}, "id" : "id"}');
@@ -114,6 +116,8 @@ while ($buff = fread($in, 4096)) {
 
 @fclose($out);
 @fclose($in);
+var_dump($out);
+var_dump($in);
 
 // Check if file has been uploaded
 if (!$chunks || $chunk == $chunks - 1) {
@@ -122,4 +126,8 @@ if (!$chunks || $chunk == $chunks - 1) {
 }
 
 // Return Success JSON-RPC response
-die('{"jsonrpc" : "2.0", "result" : null, "id" : "id"}');
+//die('{"jsonrpc" : "2.0", "result" : null, "id" : "id"}');
+$data['data']['list'] = ['www.baidu.com','www.mobai.com'];
+$data['code'] = 0;
+$data['message'] = 'success';
+die(json_encode($data)) ;
