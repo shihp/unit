@@ -13,3 +13,11 @@ if($info_arr[1] != 0){
 }
 echo PHP_EOL;
 var_dump($info_arr);
+
+
+echo '*****************'.PHP_EOL;
+
+$float = 9.99;
+echo (int)$float.PHP_EOL;
+echo (float)$float.PHP_EOL;
+echo floatval($float).PHP_EOL;

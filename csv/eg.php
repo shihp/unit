@@ -10,6 +10,8 @@
  * 本示例适用于web访问
  */
 
+
+
 exportCsv('eg.csv', "1,2\n3,4\n");
 
 
@@ -22,3 +24,8 @@ function exportCsv($filename, $data)
     header('Pragma:public');
     exit($data);
 }
+
+/**
+ * 配合
+ * flock食用更佳
+ */
